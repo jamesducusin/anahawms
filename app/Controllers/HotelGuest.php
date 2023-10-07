@@ -16,7 +16,7 @@ class HotelGuest extends BaseController
     protected $promoModel;
     public function __construct()
     {
-        helper('StarRating');
+        helper(['StarRating', 'Toastr']);
         $this->session = session();
         $this->roomModel = new \App\Models\RoomModel();
         $this->roomTypeModel = new \App\Models\RoomType();
@@ -39,7 +39,7 @@ class HotelGuest extends BaseController
                 ->groupBy('services.id')
 
                 ->findAll(),
-           
+
             'featured' => $this->promoModel->select('*, promos.name as pname, promos.description as pdescription')
                 ->join('room_types', 'room_types.id = promos.roomtype_id', 'inner')
                 ->where(["promos.status" => 1])->find(),
@@ -55,8 +55,7 @@ class HotelGuest extends BaseController
 
     public function booking($id = null)
     {
-        if($this->request->getPost()) {
-            
+        if ($this->request->getPost()) {
         }
         return view('guest/hotel-booking');
     }
@@ -64,7 +63,7 @@ class HotelGuest extends BaseController
 
     public function detail($id)
     {
-       
+
         $facilityModel = new \App\Models\FacilityModel();
         $facilityType = new \App\Models\FacilityType();
         $photoModel = new \App\Models\PhotoModel();
@@ -72,11 +71,11 @@ class HotelGuest extends BaseController
             'details' => $this->roomTypeModel->select('*, rooms.id as rid, room_types.id as rtid')
                 ->join('rooms', 'room_types.id = rooms.type_id', 'inner')
                 ->find($id),
-           
+
             'facilities' => $facilityModel->select('*')
                 ->findAll(),
             'facility_types' => $facilityType->findAll(),
-            
+
             'reviews' => $this->reviewModel->select('*, profiles.name as pname, reviews.id as rid, users.id as uid, profiles.id as pid')
                 ->selectAvg('rate', 'rerate')
                 ->selectCount('rate', 'rateCount')
@@ -89,7 +88,7 @@ class HotelGuest extends BaseController
             'rateAvg' =>  $this->reviewModel->selectAvg('rate', 'rating')
                 ->where('reviews.service_id', 1)->find(),
             'photos' => $photoModel->findAll(),
-          
+
             'rooms' => $this->roomTypeModel
                 ->where("id !=", $id)
                 ->findAll(),
@@ -97,8 +96,23 @@ class HotelGuest extends BaseController
         // var_dump($data['rateAvg']);
         return view('guest/hotel-detail', $data);
     }
-    public function checkAvailability() {
-        
+    public function checkAvailability()
+    {
+    }
+
+    public function commingsoon()
+    {
+        if ($this->request->getPost()) {
+            $newModel = new \App\Models\NewModel();
+            $validation = $this->validate($newModel->validationRules);
+            $this->session->setFlashdata('info', 'Thank you, please wait for further notice.');
+            if ($validation) {
+                $newModel->insert(['email' => $this->request->getPost('email')]);
+                return redirect('/');
+            }
+            return redirect('/'); 
+        }
+        return view('guest/comming-soon');
     }
 
     public function dashboard()

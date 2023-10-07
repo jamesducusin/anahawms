@@ -173,13 +173,13 @@
                                         <td class="mx-3"><span class=" badges bg-info ">Partial</span></td>
                                         <td class="mx-3"><span class="  badges bg-lightyellow">Pending</span></td>
                                         <td>
-                                            <a class="me-3 confirm-text" href="<?= site_url('admin/') ?>">
+                                            <a class="me-3 " href="<?= site_url('admin/') ?>">
                                                 <img src="<?= site_url('assets/admin') ?>/img/icons/eye.svg" alt="img">
                                             </a>
-                                            <a class="me-3 confirm-text" href="<?= site_url('admin/') ?>">
+                                            <a class="me-3 " href="<?= site_url('admin/') ?>">
                                                 <img src="<?= site_url('assets/admin') ?>/img/icons/edit.svg" alt="img">
                                             </a>
-                                            <a class="me-3 confirm-text" href="javascript:void(0);">
+                                            <a class="me-3 " href="javascript:void(0);">
                                                 <img src="<?= site_url('assets/admin') ?>/img/icons/accept.svg" alt="img">
                                             </a>
                                             <a class="me-3 confirm-text" href="javascript:void(0);">

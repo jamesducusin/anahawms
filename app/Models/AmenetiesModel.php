@@ -14,7 +14,7 @@ class AmenetiesModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['name', 'description','status', 'icon'];
+    protected $allowedFields    = ['name', 'description', 'for_all', 'status', 'icon'];
 
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';

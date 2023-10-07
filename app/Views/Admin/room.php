@@ -5,7 +5,7 @@
 
 
     <?php echo view('admin/inc/head-css', array('title' => 'Rooms')); ?>
-
+    <link rel="stylesheet" href="<?= site_url('assets/admin') ?>/css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" href="<?= site_url('assets/admin/') ?>css/style.css">
 
 
@@ -20,11 +20,17 @@
         <?= $this->include('Admin/inc/header-nav.php'); ?>
         <?= $this->include('Admin/inc/sidebar-nav.php'); ?>
 
+
         <div class="page-wrapper">
             <div class="content">
+            <div class="page-header">
+                    <div class="page-title">
+                        <h4>Rooms</h4>
+                        <h6>Manage rooms</h6>
+                    </div>
+                   
+                </div>
                 <div class="row">
-
-
                     <div class="col-lg-3 col-sm-6 col-12 d-flex">
                         <div class="dash-count">
                             <div class="dash-counts">
@@ -70,43 +76,42 @@
                         </div>
                     </div>
                 </div>
+                <div class="row"> 
+                <div class="page-header">
+                    <div class="page-title"></div>
+                    <div class="page-btn">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#add-room" class="btn btn-added"><img src="<?= site_url('assets/admin') ?>/img/icons/plus.svg" alt="img" class="me-1">Add New Room</a>
+                    </div>  
+                   
+                </div>
+                    </div>
+                
 
-
-                <div class="card mb-0">
+                <div class="card">
                     <div class="card-body">
-                        
-                        <div class="page-header">
-                            
-                            <div class="page-title">
-                                
-                                <h4>Rooms</h4>
-                                <h6>Manage rooms</h6>
-                                
-                            </div>
-                            <div class="row " style="width:320px">
-                           
-                            <div class="col-sm-6 wordset" >
-                                    <ul>
-                                        <li>
-                                            <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img src="<?= site_url('assets/admin') ?>/img/icons/pdf.svg" alt="img"></a>
-                                        </li>
-                                        <li>
-                                            <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img src="<?= site_url('assets/admin') ?>/img/icons/excel.svg" alt="img"></a>
-                                        </li>
-                                        <li>
-                                            <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img src="<?= site_url('assets/admin') ?>/img/icons/printer.svg" alt="img"></a>
-                                        </li>
-                                    </ul>
+                        <div class="table-top">
+                            <div class="search-set">
+
+                                <div class="search-input">
+                                    <a class="btn btn-searchset"><img src="<?= site_url('assets/admin') ?>/img/icons/search-white.svg" alt="img"></a>
                                 </div>
-                                <div class="col-sm-6     page-btn">
-                                    <a href="#" data-bs-target="#add-room" data-bs-toggle="modal" class=" btn-sm btn-added"><img src="<?= site_url('assets/admin') ?>/img/icons/plus.svg" alt="img">Add Rooms</a>
-                                </div>
-                               
                             </div>
-
-
-
+                            <div class="wordset">
+                                <ul>
+                                    <li>
+                                        <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img src="<?= site_url('assets/admin') ?>/img/icons/pdf.svg" alt="img"></a>
+                                    </li>
+                                    <li>
+                                        <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img src="<?= site_url('assets/admin') ?>/img/icons/excel.svg" alt="img"></a>
+                                    </li>
+                                    <li>
+                                        <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img src="<?= site_url('assets/admin') ?>/img/icons/printer.svg" alt="img"></a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
+
+
                         <div class="table-responsive">
                             <table class="table  datanew">
                                 <thead>
@@ -144,7 +149,7 @@
                                         <td><span class="badges bg-lightyellow ">Occupied</span> </td>
                                         <td>
                                             <span data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Housekeeping">
-                                                <a class="me-3" href="#" data-bs-toggle="modal" data-bs-target="#housekeeping">
+                                                <a class="me-3" href="#" data-bs-toggle="modal" data-bs-target="#add-housekeeping">
                                                     <img src="<?= site_url('assets/admin') ?>/img/icons/housekeeping.svg" alt="img">
                                                 </a>
                                             </span>
@@ -164,6 +169,76 @@
                             </table>
                         </div>
                     </div>
+                </div>
+
+            </div>
+            <!-- </div>
+            </div> -->
+            <!-- </div> -->
+        </div>
+    </div>
+    <div class="modal fade" data-bs-backdrop="static" id="add-housekeeping" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog " role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Housekeeping</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>Room #</label>
+                       <input type="text" value="Rm-101" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-12">
+                            <div class="form-group mb-3">
+                                <label>Housekeeping Status</label>
+                                <select class="select">
+                                    <option>Choose Status</option>
+                                    <option selected> Dirty</option>
+                                    <option> Cleaned</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>Remarks<span class="manitory">*</span></label>
+                                <textarea>Fixed it</textarea>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group mb-3">
+                                <label>Assigned to<span class="manitory">*</span></label>
+                                <select class="select">
+                                    <option>Choose </option>
+                                    <option selected> James Ducusin</option>
+                                    <option> Joshua Mercene</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group mb-3">
+                                <label>Date<span class="manitory">*</span></label>
+                                <div class="input-groupicon">
+                                    <input type="text" placeholder="<?= Date('d M Y') ?>" class="datetimepicker">
+                                    <div class="addonset">
+                                        <img src="<?= site_url('assets/admin') ?>/img/icons/calendars.svg" alt="img">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-submit">Update</button>
+                    <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
                 </div>
             </div>
         </div>
@@ -215,52 +290,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="clean-room" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog " role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Edit room</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label>Room Number<span class="manitory">*</span></label>
-                                <input type="text" value="Rm-101">
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-group mb-0">
-                                <label>Room Type</label>
-                                <select class="select">
-                                    <option>Choose Type</option>
-                                    <option selected> Deluxe</option>
-                                    <option> Poolside</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-group mb-0">
-                                <label>Floor</label>
-                                <select class="select">
-                                    <option>Choose Type</option>
-                                    <option selected> 1st floor</option>
-                                    <option> 2nd floor</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-submit">Update</button>
-                    <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    
     <div class="modal fade" id="add-room" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -323,7 +353,8 @@
 
 
     <?= $this->include('Admin/inc/end-script.php'); ?>
-
+    <script src="<?= site_url('assets/admin') ?>/js/moment.min.js"></script>
+    <script src="<?= site_url('assets/admin') ?>/js/bootstrap-datetimepicker.min.js"></script>
     <script src="<?= site_url('assets/admin') ?>/plugins/apexchart/apexcharts.min.js"></script>
     <script src="<?= site_url('assets/admin') ?>/plugins/apexchart/chart-data.js"></script>
     <script src="<?= site_url('assets/admin') ?>/plugins/sweetalert/sweetalert2.all.min.js"></script>

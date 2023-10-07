@@ -2,46 +2,15 @@
 <html lang="en">
 
 <head>
-     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <meta name="description" content="rica">
-     <meta name="keywords" content="rica">
-     <meta name="author" content="rica">
-     <link rel="icon" href="../assets/images/favicon.png" type="image/x-icon" />
-     <title>Rica</title>
-
-     <!--Google font-->
-     <link href="https://fonts.googleapis.com/css?family=Nunito:300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap"
-          rel="stylesheet">
-     <link href="https://fonts.googleapis.com/css?family=Dancing+Script&amp;display=swap" rel="stylesheet">
-
-     <!-- Icons -->
-     <link rel="stylesheet" type="text/css" href="../assets/css/font-awesome.css">
-
-     <!-- Animation -->
-     <link rel="stylesheet" type="text/css" href="../assets/css/animate.css">
-
-     <!--Slick slider css-->
-     <link rel="stylesheet" type="text/css" href="../assets/css/slick.css">
-     <link rel="stylesheet" type="text/css" href="../assets/css/slick-theme.css">
-
-     <!-- Bootstrap css -->
-     <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css">
-
-     <!-- Theme css -->
-     <link rel="stylesheet" type="text/css" href="../assets/css/color1.css">
+<?php echo view('Guest/inc/head-css', array('title' => 'Home')); ?>
+<link rel="stylesheet" href=<?= site_url('assets/hotelresto') ?>/plugins/toastr/toatr.css">
 
 </head>
 
 <body>
 
 
-     <!-- pre-loader start -->
-     <div class="loader-wrapper img-gif">
-          <img src="../assets/images/loader.gif" alt="">
-     </div>
-     <!-- pre-loader end -->
+<?= $this->include('Guest/inc/hotel-loader.php') ?>
 
 
      <!-- section start -->
@@ -3289,9 +3258,9 @@
                                         </a>
                                    </div>
                                    <h2>Will be Opening Soon!</h2>
-                                   <form action="#" class="theme-form w-100">
+                                   <form action="<?=site_url('commingsoon')?>" method="post" class="theme-form w-100">
                                         <label>enter your email:</label>
-                                        <input type="text" name="password" id="name" class="form-control" autofocus="">
+                                        <input type="email" name="email" id="email" class="form-control" autofocus="">
                                         <div class="col-md-12">
                                              <div class="actions">
                                                   <button type="submit" class="btn btn-solid">notify me</button>
@@ -3305,19 +3274,15 @@
           </div>
      </div>
      <!-- section end -->
+     <div class="d-none">
+     <button type="button" class="btn btn-outline-info mr-1 mb-1 d-none"
+                                    id="type-info">Info</button>
+     </div>
 
 
-     <!-- latest jquery-->
-     <script src="../assets/js/jquery-3.5.1.min.js"></script>
+     <?= $this->include('Guest/inc/end-script.php') ?>
+     
 
-     <!-- slick js-->
-     <script src="../assets/js/slick.js"></script>
-
-     <!-- Bootstrap js-->
-     <script src="../assets/js/bootstrap.bundle.min.js"></script>
-
-     <!-- Theme js-->
-     <script src="../assets/js/script.js"></script>
 
 
 </body>

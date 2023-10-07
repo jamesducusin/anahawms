@@ -26,7 +26,7 @@
                         <h6>Manage Housekeeping</h6>
                     </div>
                     <div class="page-btn">
-                        <a href="addproduct.html" class="btn btn-added"><img src="<?= site_url('assets/admin') ?>/img/icons/plus.svg" alt="img" class="me-1">Add</a>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#add-housekeeping" class="btn btn-added"><img src="<?= site_url('assets/admin') ?>/img/icons/plus.svg" alt="img" class="me-1">Add</a>
                     </div>
                 </div>
 
@@ -149,11 +149,9 @@
                                         <td>1st Floor </td>
                                         <td>James Ducusin</td>
                                         <td><span class="badges bg-danger">Dirty</span> </td>
-                                       
+
                                         <td>
-                                            <a class="me-3" href="#" data-bs-target="#view-type" data-bs-toggle="modal">
-                                                <img src="<?= site_url('assets/admin') ?>/img/icons/eye.svg" alt="img">
-                                            </a>
+                                           
                                             <a class="me-3" href="#" data-bs-target="#edit-housekeeping" data-bs-toggle="modal">
                                                 <img src="<?= site_url('assets/admin') ?>/img/icons/edit.svg" alt="img">
                                             </a>
@@ -172,16 +170,28 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="edit-housekeeping" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" data-bs-backdrop="static" id="add-housekeeping" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog " role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Edit Housekeeping</h5>
+                    <h5 class="modal-title">Add Housekeeping</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>Room #</label>
+                        <select class="select" name="" id="">
+                            <option selected>Choose Room</option>
+                            <option value="1">Rm-101</option>
+                            <option value="2">Rm-102</option>
+                        </select>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
 
                         <div class="col-12">
@@ -197,7 +207,7 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label>Remarks<span class="manitory">*</span></label>
-                                <input type="text" value="Fixed it">
+                                <textarea>Fixed it</textarea>
                             </div>
                         </div>
                         <div class="col-12">
@@ -212,9 +222,87 @@
                         </div>
                         <div class="col-12">
                             <div class="form-group mb-3">
-                            <label>Date<span class="manitory">*</span></label>
+                                <label>Date<span class="manitory">*</span></label>
                                 <div class="input-groupicon">
-                                    <input type="text" placeholder="<?=Date('d M Y')?>" class="datetimepicker">
+                                    <input type="text" placeholder="<?= Date('d M Y') ?>" class="datetimepicker">
+                                    <div class="addonset">
+                                        <img src="<?= site_url('assets/admin') ?>/img/icons/calendars.svg" alt="img">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-submit">Update</button>
+                    <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" data-bs-backdrop="static" id="edit-housekeeping" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog " role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Housekeeping</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label>Room #</label>
+                                <input type="text" disabled value="Rm-101">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label>Room Type</label>
+                                <input type="text" disabled value="Deluxe">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label>Floor</label>
+                                <input type="text" disabled value="1st Floor">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-12">
+                            <div class="form-group mb-3">
+                                <label>Housekeeping Status</label>
+                                <select class="select">
+                                    <option>Choose Status</option>
+                                    <option selected> Dirty</option>
+                                    <option> Cleaned</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                            <label>Remarks<span class="manitory">*</span></label>
+                                <textarea>Fixed it</textarea>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group mb-3">
+                                <label>Assigned to<span class="manitory">*</span></label>
+                                <select class="select">
+                                    <option>Choose </option>
+                                    <option selected> James Ducusin</option>
+                                    <option> Joshua Mercene</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group mb-3">
+                                <label>Date<span class="manitory">*</span></label>
+                                <div class="input-groupicon">
+                                    <input type="text" placeholder="<?= Date('d M Y') ?>" class="datetimepicker">
                                     <div class="addonset">
                                         <img src="<?= site_url('assets/admin') ?>/img/icons/calendars.svg" alt="img">
                                     </div>

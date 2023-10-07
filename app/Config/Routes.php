@@ -14,6 +14,8 @@ $routes->match(['get', 'post'], '/hotel/listing', 'HotelGuest::listing');
 $routes->match(['get', 'post'], '/hotel/booking/(:any)', 'HotelGuest::booking/$1');
 $routes->match(['get', 'post'], '/hotel/details/(:any)', 'HotelGuest::detail/$1');
 $routes->match(['get', 'post'], '/hotel/dashboard', 'HotelGuest::dashboard');
+$routes->match(['get', 'post'], '/commingsoon', 'HotelGuest::commingsoon');
+
 
 //Admin
 $routes->match(['get', 'post'], '/admin/room/type', 'HotelAdmin::room_type');

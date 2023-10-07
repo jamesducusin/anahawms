@@ -2,18 +2,19 @@
 <html lang="en">
 
 <head>
-    <?php echo view('hotel/inc/head-css', array('title' => 'Home')); ?>
+    <?php echo view('Guest/inc/head-css', array('title' => 'Home')); ?>
+    <link rel="stylesheet" href="<?= site_url('assets/admin') ?>/plugins/toastr/toatr.css">
 
 </head>
 
 <body>
 
-    <?= $this->include('hotel/inc/hotel-loader.php') ?>
+    <?= $this->include('Guest/inc/hotel-loader.php') ?>
 
     <!-- header start -->
     <header class="overlay-black">
 
-        <?= $this->include('hotel/inc/header-nav.php') ?>
+        <?= $this->include('Guest/inc/header-nav.php') ?>
 
     </header>
     <!--  header end -->
@@ -62,7 +63,7 @@
                                                                 <input placeholder="<?= date('d M Y', strtotime('+1 day')); ?>" id="datepicker1" readonly disabled />
                                                             </div>
 
-                                                            <div class="rooms-section"  >
+                                                            <div class="rooms-section">
                                                                 <div class="search-body">
                                                                     <label>Rooms & Guests</label>
                                                                     <input type="text" class="form-control open-select" id="guest" placeholder=" 1adults • 0kids • 1rooms" readonly>
@@ -70,36 +71,36 @@
 
                                                                 <input type="text" id="guestHide" class="form-control open-select d-none">
                                                                 <div class="selector-box selector_box top-0 start-0" id="divGuest">
-                                                                    <form action="<?=site_url('hotel/details')?>" method="post">
-                                                                    <div class="room-cls">
-                                                                        <div class="qty-box">
-                                                                            <label>rooms</label>
-                                                                            <div class="input-group">
-                                                                                <button type="button" class="btn btn-number " data-type="minus" data-field="quant[1]"> - </button>
-                                                                                <input type="text" id="room" name="quant[1]" class="form-control input-number" value="1" min="1" max="20" readonly>
-                                                                                <button type="button" class="btn btn-number " data-type="plus" data-field="quant[1]">+</button>
+                                                                    <form action="<?= site_url('hotel/details') ?>" method="post">
+                                                                        <div class="room-cls">
+                                                                            <div class="qty-box">
+                                                                                <label>rooms</label>
+                                                                                <div class="input-group">
+                                                                                    <button type="button" class="btn btn-number " data-type="minus" data-field="quant[1]"> - </button>
+                                                                                    <input type="text" id="room" name="quant[1]" class="form-control input-number" value="1" min="1" max="20" readonly>
+                                                                                    <button type="button" class="btn btn-number " data-type="plus" data-field="quant[1]">+</button>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="qty-box">
+                                                                                <label>adult</label>
+                                                                                <div class="input-group">
+                                                                                    <button type="button" class="btn btn-number" data-type="minus" data-field="quant[2]"> - </button>
+                                                                                    <input type="text" id="adult" name="quant[2]" class="form-control input-number" value="2" min="1" max="40" readonly>
+                                                                                    <button type="button" class="btn btn-number " data-type="plus" data-field="quant[2]">+</button>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="qty-box">
+                                                                                <label>Kids</label>
+                                                                                <div class="input-group">
+                                                                                    <button type="button" class="btn btn-number " data-type="minus" data-field="quant[3]">-</button>
+                                                                                    <input type="text" name="quant[3]" id="child" class="form-control qty-input input-number" value="0" min="0" max="30" readonly>
+                                                                                    <button type="button" class="btn btn-number  " data-type="plus" data-field="quant[3]">+</button>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="qty-box">
-                                                                            <label>adult</label>
-                                                                            <div class="input-group">
-                                                                                <button type="button" class="btn btn-number" data-type="minus" data-field="quant[2]"> - </button>
-                                                                                <input type="text" id="adult" name="quant[2]" class="form-control input-number" value="2" min="1" max="40" readonly>
-                                                                                <button type="button" class="btn btn-number " data-type="plus" data-field="quant[2]">+</button>
-                                                                            </div>
+                                                                        <div class="bottom-part">
+                                                                            <a href="#" id="add-btn" type="submit" class="btn">apply</a>
                                                                         </div>
-                                                                        <div class="qty-box">
-                                                                            <label>Kids</label>
-                                                                            <div class="input-group">
-                                                                                <button type="button" class="btn btn-number " data-type="minus"  data-field="quant[3]">-</button>
-                                                                                <input type="text" name="quant[3]" id="child" class="form-control qty-input input-number" value="0" min="0" max="30" readonly>
-                                                                                <button type="button" class="btn btn-number  " data-type="plus" data-field="quant[3]">+</button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="bottom-part">
-                                                                        <a href="#" id="add-btn" type="submit" class="btn">apply</a>
-                                                                    </div>
                                                                     </form>
                                                                 </div>
                                                             </div>
@@ -133,7 +134,7 @@
                                                             </div>
                                                             <div class="search-body btn-search">
                                                                 <div class="right-part">
-                                                                    <a href="#" class="btn btn-solid color1">find
+                                                                    <a href="<?= site_url('commingsoon') ?>" class="btn btn-solid color1">find
                                                                         food</a>
                                                                 </div>
                                                             </div>
@@ -157,7 +158,7 @@
                                                             </div>
                                                             <div class="search-body btn-search">
                                                                 <div class="right-part">
-                                                                    <a href="#" class="btn btn-solid color1">Check availability</a>
+                                                                    <a href="<?= site_url('commingsoon') ?>" class="btn btn-solid color1">Check availability</a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -184,7 +185,7 @@
 
                                                             <div class="search-body btn-search">
                                                                 <div class="right-part">
-                                                                    <a href="#" class="btn btn-solid color1">Check availability</a>
+                                                                    <a href="<?= site_url('commingsoon') ?>" class="btn btn-solid color1">Check availability</a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -218,7 +219,7 @@
                                                             </div>
                                                             <div class="search-body btn-search">
                                                                 <div class="right-part">
-                                                                    <a href="#" class="btn btn-solid color1">Check availability</a>
+                                                                    <a href="<?= site_url('commingsoon') ?>" class="btn btn-solid color1">Check availability</a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -241,7 +242,7 @@
     <!-- category start -->
     <section class="top-category margin-cls animated-section">
 
-        <?= $this->include('hotel/inc/animated-section.php') ?>
+        <?= $this->include('Guest/inc/animated-section.php') ?>
 
         <div class="category-4 no-arrow">
             <?php $i = 1;
@@ -295,7 +296,7 @@
     <!-- about section start -->
     <section class="about-section three-image section-b-space animated-section">
 
-        <?= $this->include('hotel/inc/animated-section.php') ?>
+        <?= $this->include('Guest/inc/animated-section.php') ?>
 
         <div class="container">
             <div class="title-3">
@@ -339,7 +340,7 @@
     <!-- video section start -->
     <section class="video_section parallax-img animated-section">
 
-        <?= $this->include('hotel/inc/animated-section.php') ?>
+        <?= $this->include('Guest/inc/animated-section.php') ?>
 
         <img src="<?= site_url('assets/hotelresto/images/parallax') ?>/parallax-01.png" alt="" class="img-fluid blur-up lazyload bg-img">
         <div class="container">
@@ -419,7 +420,7 @@
 
     <section class="process-steps section-b-space bg-white animated-section">
 
-        <?= $this->include('hotel/inc/animated-section.php') ?>
+        <?= $this->include('Guest/inc/animated-section.php') ?>
 
         <div class="container">
             <div class="title-3">
@@ -430,7 +431,7 @@
                 <div class="row popular-section special-section grid-box">
                     <?php
                     foreach ($rooms as $room) :
-                        $amenities = explode(";", $room['amenities']); ?>
+                        $amenities = "explode" ?>
                         <div class="col-lg-3 col-sm-6">
                             <div class="special-box " style="<?= $room['status'] == 3 ? "color: #6c757d; 
         opacity: 0.6;   
@@ -453,7 +454,7 @@
                                             <div class="bottom-section">
 
                                                 <div class="price">
-                                                    <del>&#8369;<?= $room['highestPrice'] ?></del>
+                                                    <del>&#8369;<?= $room['price'] ?></del>
                                                     <span>&#8369;<?= $room['price'] ?></span>
                                                     <div class="facility-detail">
                                                         <?php for ($i = 0; $i < 2; $i++) :
@@ -488,7 +489,7 @@
     <!-- full banner section start -->
     <section class="food-banner animated-section">
 
-        <?= $this->include('hotel/inc/animated-section.php') ?>
+        <?= $this->include('Guest/inc/animated-section.php') ?>
 
         <div class="container">
             <div class="row">
@@ -516,7 +517,7 @@
     <!-- about section start -->
     <section class="section-b-space category-section ratio3_2 animated-section">
 
-        <?= $this->include('hotel/inc/animated-section.php') ?>
+        <?= $this->include('Guest/inc/animated-section.php') ?>
 
         <div class="container">
             <div class="title-3">
@@ -652,7 +653,7 @@
     <!-- video section start -->
     <section class="video-section parallax-img animated-section">
 
-        <?= $this->include('hotel/inc/animated-section.php') ?>
+        <?= $this->include('Guest/inc/animated-section.php') ?>
 
         <img src="<?= site_url('assets/hotelresto/images') ?>/parallax/parallax-resto.jpg" alt="" class="img-fluid blur-up lazyload bg-img">
         <div class="container">
@@ -672,7 +673,7 @@
     </section>
     <section class="blog_section section-b-space ratio_55 animated-section">
 
-        <?= $this->include('hotel/inc/animated-section.php') ?>
+        <?= $this->include('Guest/inc/animated-section.php') ?>
 
         <div class="container">
             <div class="title-3">
@@ -807,20 +808,31 @@
             </div>
         </div>
     </section>
+
+
+
+
+
+
     <!-- video section end -->
 
-    <?= $this->include('hotel/inc/footer.php') ?>
+    <?= $this->include('Guest/inc/footer.php') ?>
 
 
 
-    <?= $this->include('hotel/inc/end-script.php') ?>
-    <?= $this->include('hotel/inc/hotel-search.php') ?>
+    <?= $this->include('Guest/inc/end-script.php') ?>
+    <?= $this->include('Guest/inc/toastr.php') ?>
+
+    <?= $this->include('Guest/inc/hotel-search.php') ?>
+
+   
     <script>
         $("#guest").on("click", function() {
             $("#divGuest").show();
-           
+
         });
     </script>
+   
 
 
 

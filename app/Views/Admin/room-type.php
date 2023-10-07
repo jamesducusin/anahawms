@@ -35,9 +35,12 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="table-top">
-                            <div class="search-set">
-                               
-                            </div>
+                        <div class="search-set">
+                              
+                              <div class="search-input">
+                                  <a class="btn btn-searchset"><img src="<?= site_url('assets/admin') ?>/img/icons/search-white.svg" alt="img"></a>
+                              </div>
+                          </div>
                             <div class="wordset">
                                 <ul>
                                     <li>
@@ -93,7 +96,10 @@
                                         <td>&#x20B1; 1250.00</td>
                                         <td>Base: 2<br>Max: 5</td>
                                         <td>No. bed: 2<br>Price per bed: &#x20B1; 300.00</td>
-                                        <td><span class="badges bg-info">Active </span></td>
+                                        <td> <div class="status-toggle d-flex justify-content-between align-items-center">
+                                                <input type="checkbox" id="user1" class="check" checked="true">
+                                                <label for="user2" class="checktoggle">checkbox</label>
+                                            </div></td>
                                         <td>
                                             <a class="me-3" href="product-details.html" data-bs-target="#view-type" data-bs-toggle="modal">
                                                 <img src="<?= site_url('assets/admin') ?>/img/icons/eye.svg" alt="img">

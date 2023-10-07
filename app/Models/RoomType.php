@@ -14,8 +14,8 @@ class RoomType extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['name', 'service_id', 'shortcode', 'description', 'capacity', 'max_capacity', 'extra_bed', 'charge_addbed',
-                                 'status', 'price', 'image', 'highestPrice'];
+    protected $allowedFields    = ['name', 'service_id', 'description', 'capacity', 'max_capacity', 'extra_bed', 'charge_addbed', 'charge_addhead',
+                                 'status', 'price', 'image'];
 
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
