@@ -6,6 +6,7 @@
 
     <link rel="stylesheet" href="<?= site_url('assets/admin') ?>/css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" href="<?= site_url('assets/admin/') ?>css/style.css">
+    <link rel="stylesheet" href="<?= site_url('assets/admin') ?>/plugins/toastr/toatr.css">
 </head>
 
 <body>
@@ -136,7 +137,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                <?php foreach($datas as $data):?>
                                     <tr>
+                                      
                                         <td>
                                             <label class="checkboxs">
                                                 <input type="checkbox">
@@ -144,23 +147,32 @@
                                             </label>
                                         </td>
 
-                                        <td>Rm-101</td>
-                                        <td>Deluxe Room </td>
-                                        <td>1st Floor </td>
-                                        <td>James Ducusin</td>
-                                        <td><span class="badges bg-danger">Dirty</span> </td>
+                                        <td><?= $data['roomNumber']?></td>
+                                        <td><?= $data['name']?></td>
+                                        <td><?= $data['floor']?></td>
+                                        <td><?= $data['firstname'] . ' ' , $data['lastname']?></td>
+                                        <td><span class="badges bg-danger"><?= ($data['housekeeping_status'] === '0')?'Dirty':'Cleaned';?></span> </td>
 
                                         <td>
                                            
-                                            <a class="me-3" href="#" data-bs-target="#edit-housekeeping" data-bs-toggle="modal">
+                                            <a class="me-3 button-update-housekeeping" href="#"
+                                                data-idd="<?= $data['id']?>"
+                                                data-roomnumber="<?= $data['roomNumber']?>"
+                                                data-floor="<?= $data['floor']?>"
+                                                data-name="<?= $data['name']?>"
+                                                data-housekeeping_status="<?= ($data['housekeeping_status'] === '0')?'Dirty':'Cleaned'?>"
+                                                data-remarks="<?= $data['remarks']?>"
+                                                data-user_id="<?= $data['user_id']?>"
+                                                data-date_limit="<?= $data['date_limit']?>" >
                                                 <img src="<?= site_url('assets/admin') ?>/img/icons/edit.svg" alt="img">
                                             </a>
-                                            <a class="me-3 confirm-text" href="javascript:void(0);">
+                                            <a class="me-3 confirm-text" href="javascript:void(0); <?= base_url('/admin/housekeeping/' . $data['housekeeping_id'])?>">
                                                 <img src="<?= site_url('assets/admin') ?>/img/icons/delete.svg" alt="img">
                                             </a>
                                         </td>
+                                 
                                     </tr>
-
+                                    <?php endforeach;?>
                                 </tbody>
                             </table>
                         </div>
@@ -179,64 +191,69 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label>Room #</label>
-                        <select class="select" name="" id="">
-                            <option selected>Choose Room</option>
-                            <option value="1">Rm-101</option>
-                            <option value="2">Rm-102</option>
-                        </select>
+                <form action="<?= base_url('/admin/housekeeping');?>" method="post">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>Room #</label>
+                                    <input type="hidden" value="add_housekeeping" name="update_housekeeping">
+                                    <select class="select" name="roomNumber">
+                                        <option selected>Choose Room</option>
+                                        <?php foreach($room_data as $data):?>
+                                        <option value="<?= $data['id']?>"><?= $data['roomNumber']?></option>
+                                        <?php endforeach;?>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
+                        <div class="row">
 
-                        <div class="col-12">
-                            <div class="form-group mb-3">
-                                <label>Housekeeping Status</label>
-                                <select class="select">
-                                    <option>Choose Status</option>
-                                    <option selected> Dirty</option>
-                                    <option> Cleaned</option>
-                                </select>
+                            <div class="col-12">
+                                <div class="form-group mb-3">
+                                    <label>Housekeeping Status</label>
+                                    <select class="select" name="housekeeping_status">
+                                        <option>Choose Status</option>
+                                        <option selected value="0" selected> Dirty</option>
+                                        <option value="1"> Cleaned</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label>Remarks<span class="manitory">*</span></label>
-                                <textarea>Fixed it</textarea>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>Remarks<span class="manitory">*</span></label>
+                                    <textarea name="remarks">Fixed it</textarea>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-group mb-3">
-                                <label>Assigned to<span class="manitory">*</span></label>
-                                <select class="select">
-                                    <option>Choose </option>
-                                    <option selected> James Ducusin</option>
-                                    <option> Joshua Mercene</option>
-                                </select>
+                            <div class="col-12">
+                                <div class="form-group mb-3">
+                                    <label>Assigned to<span class="manitory">*</span></label>
+                                    <select required class="select" name="user_id">
+                                        <option>Choose</option>
+                                        <?php foreach($users as $user):?>
+                                        <option selected value="<?= $user['user_id']?>"><?= $user['firstname'] . ' ' . $user['lastname']?></option>
+                                        <?php endforeach;?>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-group mb-3">
-                                <label>Date<span class="manitory">*</span></label>
-                                <div class="input-groupicon">
-                                    <input type="text" placeholder="<?= Date('d M Y') ?>" class="datetimepicker">
-                                    <div class="addonset">
-                                        <img src="<?= site_url('assets/admin') ?>/img/icons/calendars.svg" alt="img">
+                            <div class="col-12">
+                                <div class="form-group mb-3">
+                                    <label>Date<span class="manitory">*</span></label>
+                                    <div class="input-groupicon">
+                                        <input required type="text" placeholder="<?= Date('d M Y') ?>" class="datetimepicker" name="date_limit">
+                                        <div class="addonset">
+                                            <img src="<?= site_url('assets/admin') ?>/img/icons/calendars.svg" alt="img">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-submit">Update</button>
-                    <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
-                </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-submit">Update</button>
+                        <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -249,24 +266,28 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+                <form action="<?= base_url('/admin/housekeeping');?>" method="post">
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label>Room #</label>
-                                <input type="text" disabled value="Rm-101">
+                                <input type="hidden" name="update_housekeeping" value="update_housekeeping">
+                                <input type="hidden" name="idd" class="idd">
+                                <input type="hidden" name="user_id" class="user_id">
+                                <input type="text" disabled class="roomnumber">
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label>Room Type</label>
-                                <input type="text" disabled value="Deluxe">
+                                <input type="text" disabled class="name">
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label>Floor</label>
-                                <input type="text" disabled value="1st Floor">
+                                <input type="text" disabled class="floor">
                             </div>
                         </div>
                     </div>
@@ -275,26 +296,27 @@
                         <div class="col-12">
                             <div class="form-group mb-3">
                                 <label>Housekeeping Status</label>
-                                <select class="select">
-                                    <option>Choose Status</option>
-                                    <option selected> Dirty</option>
-                                    <option> Cleaned</option>
-                                </select>
+                                <select class="select housekeeping_status" name="housekeeping_status">
+                                        <option>Choose Status</option>
+                                        <option>Dirty</option>
+                                        <option>Cleaned</option>
+                                    </select>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
                             <label>Remarks<span class="manitory">*</span></label>
-                                <textarea>Fixed it</textarea>
+                                <textarea class="remarks" name="remarks"></textarea>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group mb-3">
                                 <label>Assigned to<span class="manitory">*</span></label>
-                                <select class="select">
-                                    <option>Choose </option>
-                                    <option selected> James Ducusin</option>
-                                    <option> Joshua Mercene</option>
+                                <select required class="select user_id">
+                                    <option value="">Choose </option>
+                                    <?php foreach($users as $user):?>
+                                    <option value="<?= $user['user_id']?>"><?= $user['firstname'] . ' ' . $user['lastname']?></option>
+                                    <?php endforeach;?>
                                 </select>
                             </div>
                         </div>
@@ -302,7 +324,7 @@
                             <div class="form-group mb-3">
                                 <label>Date<span class="manitory">*</span></label>
                                 <div class="input-groupicon">
-                                    <input type="text" placeholder="<?= Date('d M Y') ?>" class="datetimepicker">
+                                    <input required type="text" placeholder="<?= Date('d M Y') ?>" class="datetimepicker date_limit">
                                     <div class="addonset">
                                         <img src="<?= site_url('assets/admin') ?>/img/icons/calendars.svg" alt="img">
                                     </div>
@@ -312,9 +334,10 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-submit">Update</button>
+                    <button type="submit" class="btn btn-submit">Update</button>
                     <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
                 </div>
+                </form>
             </div>
         </div>
     </div>
@@ -327,8 +350,38 @@
 
     <script src="<?= site_url('assets/admin') ?>/plugins/sweetalert/sweetalert2.all.min.js"></script>
     <script src="<?= site_url('assets/admin') ?>/plugins/sweetalert/sweetalerts.min.js"></script>
-
+    <?= $this->include('Guest/inc/toastr.php') ?>
     <script src="<?= site_url('assets/admin') ?>/js/script.js"></script>
 </body>
 
 </html>
+
+<script>
+        $(document).ready(function() {
+    // sa button
+            $('.button-update-housekeeping').on('click', function() {
+    
+            const idd = $(this).data('idd');
+            const roomnumber = $(this).data('roomnumber');
+            const floor = $(this).data('floor');
+            const housekeeping_status = $(this).data('housekeeping_status');
+            const name = $(this).data('name');
+            const remarks = $(this).data('remarks');
+            const user_id = $(this).data('user_id');
+            const date_limit = $(this).data('date_limit');
+
+            console.log(housekeeping_status);
+      
+            $('.idd').val(idd);
+            $('.roomnumber').val(roomnumber);
+            $('.floor').val(floor);
+            $('.housekeeping_status').val(housekeeping_status);
+            $('.name').val(name);
+            $('.remarks').val(remarks);
+            $('.user_id').val(user_id);
+            $('.date_limit').val(date_limit).trigger('change');
+         
+            $('#edit-housekeeping').modal('show');
+        });
+    });
+</script>
